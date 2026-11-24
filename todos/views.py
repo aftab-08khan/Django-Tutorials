@@ -1,7 +1,6 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect 
 
-from django.http import HttpResponse
-
+from django.http import HttpResponse,HttpResponseBadRequest
 def hello_world(request):
     return HttpResponse("Hello, World!")
 # Create your views here.
@@ -22,3 +21,16 @@ def hello_world_query(request):
 
 def hello_world_redirect(request):
     return redirect('hello_world_html')
+
+
+def post_examples(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        age = request.POST.get('age')
+        job = request.POST.get('job')
+        return render(request, "todos/render.html", {"name": name, "age": age, "job": job})
+    else :
+        return render(request, "todos/error.html")
+
+def submit_examples(request):
+    return render(request, "todos/form.html")

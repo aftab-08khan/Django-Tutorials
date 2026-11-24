@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .data-container {
+            background: #fff;
+            width: 100%;
+            max-width: 450px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #222;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .data-item {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+
+        .data-item strong {
+            display: block;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .data-item span {
+            color: #222;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 480px) {
+            .data-container {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="data-container">
+        <h1>Form Data</h1>
+        <p class="subtitle">Your submitted information is displayed below.</p>
+
+        <div class="data-item">
+            <strong>Name</strong>
+            <span>{{ name }}</span>
+        </div>
+
+        <div class="data-item">
+            <strong>Age</strong>
+            <span>{{ age }}</span>
+        </div>
+
+        <div class="data-item">
+            <strong>Job</strong>
+            <span>{{ job }}</span>
+        </div>
+
+        <a href="javascript:history.back()" class="back-button">Go Back</a>
+    </div>
+
+</body>
+</html>
