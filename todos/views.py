@@ -1,6 +1,8 @@
 from django.shortcuts import render ,redirect 
-
+from .form import PersonForm
 from django.http import HttpResponse,HttpResponseBadRequest
+
+from todos import form
 def hello_world(request):
     return HttpResponse("Hello, World!")
 # Create your views here.
@@ -24,10 +26,13 @@ def hello_world_redirect(request):
 
 
 def post_examples(request):
+
     if request.method == "POST":
-        name = request.POST.get('name')
-        age = request.POST.get('age')
-        job = request.POST.get('job')
+       form = PersonForm(request.POST)
+       if form.is_valid():
+        name = form.cleaned_data['name']
+        age = form.cleaned_data['age']
+        job = form.cleaned_data['job']
         return render(request, "todos/render.html", {"name": name, "age": age, "job": job})
     else :
         return render(request, "todos/error.html")
