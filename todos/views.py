@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect 
 from .form import PersonForm
 from django.http import HttpResponse,HttpResponseBadRequest
-
+from .infoForm import InfoForm
 from todos import form
 def hello_world(request):
     return HttpResponse("Hello, World!")
@@ -38,4 +38,27 @@ def post_examples(request):
         return render(request, "todos/error.html")
 
 def submit_examples(request):
-    return render(request, "todos/form.html")
+    form = PersonForm()
+    return render(request, "todos/form.html", {"form": form})
+
+
+def template_view(request):
+    context = {
+        "name": "John Doe",
+        "age": 30,
+        "skills": ['Engineer', 'Developer', 'Designer'],   
+
+    }
+    return render(request , 'todos/template.html', context)
+
+
+
+def get_info(request):
+    if request.method == "POST":
+        form = InfoForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.cleaned_data['image']
+            return render(request , "image/image.html", {'image': image})
+
+        else :
+            return HttpResponseBadRequest("Invalid form submission.")
