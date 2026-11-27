@@ -91,7 +91,9 @@
 </head>
 
 <body>
-
+ {% extends 'todos/base.html' %}
+  {% block title %} Rendder Page {% endblock %}
+  {% block content %}
     <div class="data-container">
         <h1>Form Data</h1>
         <p class="subtitle">Your submitted information is displayed below.</p>
@@ -113,6 +115,6 @@
 
         <a href="javascript:history.back()" class="back-button">Go Back</a>
     </div>
-
+{% endblock %}
 </body>
 </html>

@@ -6,6 +6,9 @@
     <title>Template</title>
 </head>
 <body>
+    {% extends 'todos/base.html' %}
+    {% block title %} My Templates {% endblock %}
+    {% block content %}
     <h1>{{ name }}</h1>
     <p>Age: {{ age }}</p>
     <p>Skills:</p>
@@ -14,5 +17,9 @@
         <li>{{ skill }}</li>
         {% endfor %}
     </ul>
+    {% if skills|length > 3%}
+    <p>You have many skills!</p>
+    {% endif %}
+    {% endblock %}
 </body>
 </html>

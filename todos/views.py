@@ -3,6 +3,7 @@ from .form import PersonForm
 from django.http import HttpResponse,HttpResponseBadRequest
 from .infoForm import InfoForm
 from todos import form
+from django.core.files.storage import default_storage
 def hello_world(request):
     return HttpResponse("Hello, World!")
 # Create your views here.
@@ -46,7 +47,7 @@ def template_view(request):
     context = {
         "name": "John Doe",
         "age": 30,
-        "skills": ['Engineer', 'Developer', 'Designer'],   
+        "skills": ['Engineer', 'Developer', 'Designer',"Manager"],   
 
     }
     return render(request , 'todos/template.html', context)
@@ -54,11 +55,15 @@ def template_view(request):
 
 
 def get_info(request):
+    form = InfoForm(request.POST or None, request.FILES or None)
+
     if request.method == "POST":
-        form = InfoForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data['image']
-            return render(request , "image/image.html", {'image': image})
+            filename = default_storage.save(image.name, image)
+            return render(request, "image/image.html", {
+                "form": InfoForm(),
+                "image_url": default_storage.url(filename),
+            })
 
-        else :
-            return HttpResponseBadRequest("Invalid form submission.")
+    return render(request, "image/image.html", {"form": form})
